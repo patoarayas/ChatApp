@@ -1,4 +1,4 @@
-package cl.ucn.disc.dsm.pag.chatapp.service.models;
+package cl.ucn.disc.dsm.pag.chatapp.service.results;
 
 public class AuthResult {
   public Integer id;
