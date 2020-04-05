@@ -30,12 +30,26 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     //Threeten BP
     implementation 'org.threeten:threetenbp:1.4.2'
+
+    // Retrofit: https://square.github.io/retrofit/
+    def retrofit_version = "2.7.1"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    // Gson: https://github.com/google/gson
+    implementation 'com.google.code.gson:gson:2.8.6'
+    // Commons Lang3: https://commons.apache.org/proper/commons-lang/
+    implementation 'org.apache.commons:commons-lang3:3.9'
+
+    // SLF4J
+    implementation 'org.slf4j:slf4j-api:2.0.0-alpha1'
+    testImplementation "ch.qos.logback:logback-classic:1.3.0-alpha5"
 
     // UI
     def materialVersion = "1.1.0"
