@@ -9,13 +9,15 @@ import org.threeten.bp.ZonedDateTime;
 public class Message {
 
   @PrimaryKey
-  @NonNull
-  private int msgId;
+  private int id;
 
   private int conversationId;
   private int userId;
+
+  @NonNull
   private String content;
-  private ZonedDateTime timestamp;
+  //TODO: Add Date Converter?
+  private String createdAt;
 
   private String latitude;
   private String longitude;
@@ -23,28 +25,29 @@ public class Message {
 
   /**
    * Constructor.
-   * @param msgId Message id
-   * @param conversationId  Conversation id
-   * @param userId User id
-   * @param content The content of the message
-   * @param latitude Latitude component of localization.
-   * @param longitude Longitude component of localization.
-   * @param error Error component of localization.
+   *
+   * @param id                Message id
+   * @param conversationId    Conversation id
+   * @param userId            User id
+   * @param content           The content of the message
+   * @param latitude          Latitude component of localization.
+   * @param longitude         Longitude component of localization.
+   * @param localizationError Error component of localization.
    */
-  public Message(int msgId, int conversationId, int userId, String content,
-      String latitude, String longitude, String error) {
-    this.msgId = msgId;
+  public Message(int id, int conversationId, int userId, String content, String createdAt,
+      String latitude, String longitude, String localizationError) {
+    this.id = id;
     this.conversationId = conversationId;
     this.userId = userId;
     this.content = content;
-    this.timestamp = ZonedDateTime.now();
+    this.createdAt = createdAt;
     this.latitude = latitude;
     this.longitude = longitude;
-    this.localizationError = error;
+    this.localizationError = localizationError;
   }
 
-  public int getMsgId() {
-    return msgId;
+  public int getId() {
+    return id;
   }
 
   public int getConversationId() {
@@ -59,8 +62,8 @@ public class Message {
     return content;
   }
 
-  public ZonedDateTime getTimestamp() {
-    return timestamp;
+  public String getCreatedAt() {
+    return createdAt;
   }
 
   public String getLatitude() {

@@ -24,14 +24,16 @@ public abstract class ChatRoomDatabase extends RoomDatabase {
 
   /**
    * Instanciate the database if is'n already instanciated.
+   *
    * @param context Application context
    * @return The Singleton
    */
-  static ChatRoomDatabase getDatabase(final Context context){
-    if(INSTANCE == null){
-      synchronized (ChatRoomDatabase.class){
-        if( INSTANCE == null){
-          INSTANCE = Room.databaseBuilder(context.getApplicationContext(), ChatRoomDatabase.class, "chat_database")
+  public static ChatRoomDatabase getDatabase(final Context context) {
+    if (INSTANCE == null) {
+      synchronized (ChatRoomDatabase.class) {
+        if (INSTANCE == null) {
+          INSTANCE = Room.databaseBuilder(context.getApplicationContext(), ChatRoomDatabase.class,
+              "chat_database")
               .build();
         }
       }

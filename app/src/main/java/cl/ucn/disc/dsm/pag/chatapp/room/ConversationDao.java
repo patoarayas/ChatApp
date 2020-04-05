@@ -1,5 +1,6 @@
 package cl.ucn.disc.dsm.pag.chatapp.room;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -13,7 +14,7 @@ public interface ConversationDao {
   @Insert
   void insert(Conversation conversation);
 
-  @Query("SELECT * FROM conversations_table WHERE userOneId = :userId OR userTwoId = :userId")
-  List<Conversation> getConversationsByUserId(int userId);
+  @Query("SELECT * FROM conversations_table")
+  LiveData<List<Conversation>> getAllConversations();
 
 }

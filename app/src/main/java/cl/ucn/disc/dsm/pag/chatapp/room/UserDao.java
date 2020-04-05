@@ -1,19 +1,32 @@
 package cl.ucn.disc.dsm.pag.chatapp.room;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import java.util.List;
 
-//TODO: Implement Dao
 @Dao
 public interface UserDao {
 
   @Insert
   void insert(User user);
 
-  @Query("SELECT * FROM users_table WHERE userId = :userId")
-  User getUserById(int userId);
 
-  @Query("SELECT * FROM users_table WHERE mail = :mail AND password = :password")
-  User getUserByAuth(String mail, String password);
+  /**
+   * Returns an observable list with al users on db.
+   *
+   * @return LiveData User list.
+   */
+  @Query("SELECT * FROM users_table")
+  LiveData<List<User>> getAllUsers();
+
+  /**
+   * Returns a User by its id.
+   *
+   * @param id The user id.
+   * @return An User
+   */
+  @Query("SELECT * FROM users_table WHERE id = :id")
+  User getUserById(int id);
 }

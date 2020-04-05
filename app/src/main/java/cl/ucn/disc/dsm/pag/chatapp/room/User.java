@@ -7,39 +7,33 @@ import androidx.room.PrimaryKey;
 public class User {
 
   @PrimaryKey
-  private int userId;
-
-  private String username;
+  private int id;
+  private String name;
   private String mail;
-  private String password;
+
 
   /**
    * Constructor.
-   * @param userId ID of the user
-   * @param username Username
+   *
+   * @param id   ID of the user
+   * @param name Username
    * @param mail Mail of the user
-   * @param password Password
    */
-  public User(int userId, String username, String mail, String password) {
-    this.userId = userId;
-    this.username = username;
+  public User(int id, String name, String mail) {
+    this.id = id;
+    this.name = name;
     this.mail = mail;
-    this.password = password;
   }
 
-  public int getUserId() {
-    return userId;
+  public int getId() {
+    return id;
   }
 
-  public String getUsername() {
-    return username;
+  public String getName() {
+    return name;
   }
 
   public String getMail() {
     return mail;
-  }
-
-  public String getPassword() {
-    return password;
   }
 }
