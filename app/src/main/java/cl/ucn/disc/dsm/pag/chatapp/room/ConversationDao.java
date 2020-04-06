@@ -12,9 +12,9 @@ public interface ConversationDao {
 
 
   @Insert
-  void insert(Conversation conversation);
+  void insert(ConversationRoomModel conversation);
 
   @Query("SELECT * FROM conversations_table")
-  LiveData<List<Conversation>> getAllConversations();
+  LiveData<List<ConversationRoomModel>> getAllConversations();
 
 }

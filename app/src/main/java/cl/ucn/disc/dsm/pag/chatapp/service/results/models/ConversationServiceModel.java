@@ -1,11 +1,9 @@
-package cl.ucn.disc.dsm.pag.chatapp.service.results;
+package cl.ucn.disc.dsm.pag.chatapp.service.results.models;
 
-import cl.ucn.disc.dsm.pag.chatapp.service.results.models.MessageServiceModel;
-import cl.ucn.disc.dsm.pag.chatapp.service.results.models.UserServiceModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StoreResult {
+public class ConversationServiceModel {
 
   public Integer conversationId;
   public List<UserServiceModel> users = new ArrayList<UserServiceModel>();

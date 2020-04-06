@@ -2,11 +2,13 @@ package cl.ucn.disc.dsm.pag.chatapp.room;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import cl.ucn.disc.dsm.pag.chatapp.service.results.models.MessageServiceModel;
 import org.threeten.bp.ZonedDateTime;
 
 @Entity(tableName = "messages_table")
-public class Message {
+public class MessageRoomModel {
 
   @PrimaryKey
   private int id;
@@ -34,7 +36,7 @@ public class Message {
    * @param longitude         Longitude component of localization.
    * @param localizationError Error component of localization.
    */
-  public Message(int id, int conversationId, int userId, String content, String createdAt,
+  public MessageRoomModel(int id, int conversationId, int userId, String content, String createdAt,
       String latitude, String longitude, String localizationError) {
     this.id = id;
     this.conversationId = conversationId;
@@ -44,6 +46,18 @@ public class Message {
     this.latitude = latitude;
     this.longitude = longitude;
     this.localizationError = localizationError;
+  }
+
+  @Ignore
+  public MessageRoomModel(MessageServiceModel msg) {
+    this.id = msg.id;
+    this.conversationId = msg.conversationId;
+    this.userId = msg.userId;
+    this.content = msg.content;
+    this.createdAt = msg.createdAt;
+    this.latitude = msg.latitude;
+    this.longitude = msg.longitude;
+    this.localizationError = msg.localizationError;
   }
 
   public int getId() {

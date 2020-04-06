@@ -4,7 +4,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "users_table")
-public class User {
+public class UserRoomModel {
 
   @PrimaryKey
   private int id;
@@ -19,7 +19,7 @@ public class User {
    * @param name Username
    * @param mail Mail of the user
    */
-  public User(int id, String name, String mail) {
+  public UserRoomModel(int id, String name, String mail) {
     this.id = id;
     this.name = name;
     this.mail = mail;

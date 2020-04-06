@@ -2,11 +2,13 @@ package cl.ucn.disc.dsm.pag.chatapp.room;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import cl.ucn.disc.dsm.pag.chatapp.service.results.models.ConversationServiceModel;
 import org.threeten.bp.ZonedDateTime;
 
 @Entity(tableName = "conversations_table")
-public class Conversation {
+public class ConversationRoomModel {
 
   @PrimaryKey
 
@@ -26,11 +28,24 @@ public class Conversation {
    * @param userTwoId      Id of another member of the conversation.
    * @param createdAt      Timestamp
    */
-  public Conversation(int conversationId, int userOneId, int userTwoId, String createdAt) {
+  public ConversationRoomModel(int conversationId, int userOneId, int userTwoId, String createdAt) {
     this.conversationId = conversationId;
     this.userOneId = userOneId;
     this.userTwoId = userTwoId;
     this.createdAt = createdAt;
+  }
+
+  /**
+   * Constructor from ConversationServiceModel
+   *
+   * @param conversation An ConversationServiceModel conversation
+   */
+  @Ignore
+  public ConversationRoomModel(ConversationServiceModel conversation) {
+    this.conversationId = conversation.conversationId;
+    this.userOneId = conversation.users.get(0).id;
+    this.userTwoId = conversation.users.get(1).id;
+    this.createdAt = conversation.createdAt;
   }
 
   public int getConversationId() {

@@ -4,9 +4,9 @@ import cl.ucn.disc.dsm.pag.chatapp.service.results.AuthResult;
 import cl.ucn.disc.dsm.pag.chatapp.service.results.IndexResult;
 import cl.ucn.disc.dsm.pag.chatapp.service.results.ShowResult;
 import cl.ucn.disc.dsm.pag.chatapp.service.results.StoreResult;
-import cl.ucn.disc.dsm.pag.chatapp.service.results.models.Conversation;
-import cl.ucn.disc.dsm.pag.chatapp.service.results.models.Message;
-import cl.ucn.disc.dsm.pag.chatapp.service.results.models.User;
+import cl.ucn.disc.dsm.pag.chatapp.service.results.models.ConversationServiceModel;
+import cl.ucn.disc.dsm.pag.chatapp.service.results.models.MessageServiceModel;
+import cl.ucn.disc.dsm.pag.chatapp.service.results.models.UserServiceModel;
 import java.io.IOException;
 import java.util.List;
 import org.slf4j.Logger;
@@ -65,7 +65,7 @@ public class ChatApiService implements Service {
   }
 
   @Override
-  public List<User> getRegisteredUsers() {
+  public List<UserServiceModel> getRegisteredUsers() {
     Call<IndexResult> call = this.connection.callIndex();
 
     try {
@@ -88,7 +88,7 @@ public class ChatApiService implements Service {
   }
 
   @Override
-  public List<Conversation> getConversations(String apiToken) {
+  public List<ConversationServiceModel> getConversations(String apiToken) {
     Call<ShowResult> call = this.connection.callShow(apiToken);
 
     try {
@@ -99,11 +99,11 @@ public class ChatApiService implements Service {
         throw new ChatApiException("Null response result.");
       }
 
-      if (result.conversations == null) {
+      if (result.conversationServices == null) {
         throw new ChatApiException("No users in response result.");
       }
 
-      return result.conversations;
+      return result.conversationServices;
 
     } catch (IOException ex) {
       throw new ChatApiException("Can't get a Response", ex);
@@ -111,7 +111,7 @@ public class ChatApiService implements Service {
   }
 
   @Override
-  public int setNewConversation(String apiToken, String recipientId) {
+  public int setNewConversation(String apiToken, int recipientId) {
     Call<StoreResult> call = this.connection.callStore(apiToken, recipientId);
 
     try {
@@ -131,14 +131,14 @@ public class ChatApiService implements Service {
 
 
   @Override
-  public Message sendMessage(String apiToken, String conversationId, String content,
+  public MessageServiceModel sendMessage(String apiToken, int conversationId, String content,
       String latitude, String longitude, String localizationError) {
-    Call<Message> call = this.connection
+    Call<MessageServiceModel> call = this.connection
         .callUpdate(apiToken, conversationId, content, latitude, longitude, localizationError);
 
     try {
-      final Response<Message> response = call.execute();
-      final Message result = response.body();
+      final Response<MessageServiceModel> response = call.execute();
+      final MessageServiceModel result = response.body();
 
       if (result == null) {
         throw new ChatApiException("Null response result.");

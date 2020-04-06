@@ -1,6 +1,6 @@
 package cl.ucn.disc.dsm.pag.chatapp.service.results.models;
 
-public class User {
+public class UserServiceModel {
 
   public Integer id;
   public String name;

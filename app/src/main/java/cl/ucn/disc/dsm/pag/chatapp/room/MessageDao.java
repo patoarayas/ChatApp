@@ -11,9 +11,9 @@ import java.util.List;
 public interface MessageDao {
 
   @Insert
-  void insert(Message message);
+  void insert(MessageRoomModel message);
 
   @Query("SELECT * FROM messages_table WHERE conversationId = :conversationId ORDER BY createdAt")
-  LiveData<List<Message>> getMessagesByConversation(int conversationId);
+  LiveData<List<MessageRoomModel>> getMessagesByConversation(int conversationId);
 
 }

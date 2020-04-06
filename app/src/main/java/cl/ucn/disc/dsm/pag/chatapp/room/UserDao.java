@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserDao {
 
   @Insert
-  void insert(User user);
+  void insert(UserRoomModel user);
 
 
   /**
@@ -19,7 +19,7 @@ public interface UserDao {
    * @return LiveData User list.
    */
   @Query("SELECT * FROM users_table")
-  LiveData<List<User>> getAllUsers();
+  LiveData<List<UserRoomModel>> getAllUsers();
 
   /**
    * Returns a User by its id.
@@ -28,5 +28,5 @@ public interface UserDao {
    * @return An User
    */
   @Query("SELECT * FROM users_table WHERE id = :id")
-  User getUserById(int id);
+  UserRoomModel getUserById(int id);
 }

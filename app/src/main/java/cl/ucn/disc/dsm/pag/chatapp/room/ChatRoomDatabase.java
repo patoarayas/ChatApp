@@ -7,12 +7,15 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class ,Conversation.class, Message.class}, version = 1)
+@Database(entities = {UserRoomModel.class, ConversationRoomModel.class,
+    MessageRoomModel.class}, version = 1)
 public abstract class ChatRoomDatabase extends RoomDatabase {
 
   // Daos abstract getters
   public abstract UserDao userDao();
+
   public abstract ConversationDao conversationDao();
+
   public abstract MessageDao messageDao();
 
   // SINGLETON
@@ -20,10 +23,11 @@ public abstract class ChatRoomDatabase extends RoomDatabase {
 
   // Executor
   private static final int NUMBER_OF_THREADS = 4;
-  static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+  public static final ExecutorService databaseWriteExecutor = Executors
+      .newFixedThreadPool(NUMBER_OF_THREADS);
 
   /**
-   * Instanciate the database if is'n already instanciated.
+   * Instanciate the database if it isn't already instantiated.
    *
    * @param context Application context
    * @return The Singleton

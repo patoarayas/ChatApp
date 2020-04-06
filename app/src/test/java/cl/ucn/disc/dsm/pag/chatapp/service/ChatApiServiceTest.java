@@ -1,8 +1,8 @@
 package cl.ucn.disc.dsm.pag.chatapp.service;
 
-import cl.ucn.disc.dsm.pag.chatapp.service.results.models.Conversation;
-import cl.ucn.disc.dsm.pag.chatapp.service.results.models.Message;
-import cl.ucn.disc.dsm.pag.chatapp.service.results.models.User;
+import cl.ucn.disc.dsm.pag.chatapp.service.results.models.ConversationServiceModel;
+import cl.ucn.disc.dsm.pag.chatapp.service.results.models.MessageServiceModel;
+import cl.ucn.disc.dsm.pag.chatapp.service.results.models.UserServiceModel;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,8 +27,8 @@ public class ChatApiServiceTest {
   public void getRegisteredUsersTest() {
     Service service = new ChatApiService();
 
-    List<User> users = service.getRegisteredUsers();
-    for (User usr : users) {
+    List<UserServiceModel> users = service.getRegisteredUsers();
+    for (UserServiceModel usr : users) {
       LOG.debug(usr.name);
     }
     Assertions.assertNotNull(users);
@@ -39,12 +39,12 @@ public class ChatApiServiceTest {
     Service service = new ChatApiService();
 
     String apiToken = service.getApiToken("usuario1@usuarios.cl", "usuario1");
-    List<Conversation> conversations = service.getConversations(apiToken);
+    List<ConversationServiceModel> conversationServices = service.getConversations(apiToken);
 
-    for (Conversation conv : conversations) {
-      LOG.debug("Conversation id: " + Integer.toString(conv.conversationId));
+    for (ConversationServiceModel conv : conversationServices) {
+      LOG.debug("Conversation id: " + conv.conversationId);
     }
-    Assertions.assertNotNull(conversations);
+    Assertions.assertNotNull(conversationServices);
   }
 
   @Test
@@ -52,7 +52,7 @@ public class ChatApiServiceTest {
     Service service = new ChatApiService();
 
     String apiToken = service.getApiToken("usuario1@usuarios.cl", "usuario1");
-    int conversationId = service.setNewConversation(apiToken, "3");
+    int conversationId = service.setNewConversation(apiToken, 3);
     LOG.debug("Conversation ID:" + Integer.toString(conversationId));
   }
 
@@ -61,7 +61,7 @@ public class ChatApiServiceTest {
     Service service = new ChatApiService();
 
     String apiToken = service.getApiToken("usuario1@usuarios.cl", "usuario1");
-    Message msg = service.sendMessage(apiToken, "2", "Enviado desde android",
+    MessageServiceModel msg = service.sendMessage(apiToken, 2, "Enviado desde android",
         "13", "12", "0");
     LOG.debug("Message: " + "From: " + msg.userId + "Content: " + msg.content);
     Assertions.assertNotNull(msg);

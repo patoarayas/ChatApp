@@ -1,13 +1,13 @@
 package cl.ucn.disc.dsm.pag.chatapp.service.results.models;
 
-public class Message {
+public class MessageServiceModel {
 
   public Integer id;
-  public String conversationId;
-  public String userId;
+  public Integer conversationId;
+  public Integer userId;
   public String content;
   public String createdAt;
-  public Object longitude;
+  public String longitude;
   public String latitude;
   public String localizationError;
 }

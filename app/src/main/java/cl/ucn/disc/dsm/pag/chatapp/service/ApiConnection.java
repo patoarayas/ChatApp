@@ -4,7 +4,7 @@ import cl.ucn.disc.dsm.pag.chatapp.service.results.AuthResult;
 import cl.ucn.disc.dsm.pag.chatapp.service.results.IndexResult;
 import cl.ucn.disc.dsm.pag.chatapp.service.results.ShowResult;
 import cl.ucn.disc.dsm.pag.chatapp.service.results.StoreResult;
-import cl.ucn.disc.dsm.pag.chatapp.service.results.models.Message;
+import cl.ucn.disc.dsm.pag.chatapp.service.results.models.MessageServiceModel;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -56,7 +56,7 @@ public interface ApiConnection {
    */
   @POST("chat/")
   Call<StoreResult> callStore(
-      @Query("api_token") final String apiToken, @Query("to") final String recipientId);
+      @Query("api_token") final String apiToken, @Query("to") final int recipientId);
 
   /**
    * Call API Update endpoint. Update a conversation with a new message.
@@ -70,9 +70,9 @@ public interface ApiConnection {
    * @return Call with the created Message.
    */
   @PUT("chat/{apiToken}/")
-  Call<Message> callUpdate(
+  Call<MessageServiceModel> callUpdate(
       @Path("apiToken") final String apiToken,
-      @Query("conversation_id") final String conversationId,
+      @Query("conversation_id") final int conversationId,
       @Query("content") final String content,
       @Query("loc_latitude") final String latitude,
       @Query("loc_longitude") final String longitude,

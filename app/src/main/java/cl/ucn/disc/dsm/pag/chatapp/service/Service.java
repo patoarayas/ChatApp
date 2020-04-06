@@ -1,8 +1,8 @@
 package cl.ucn.disc.dsm.pag.chatapp.service;
 
-import cl.ucn.disc.dsm.pag.chatapp.service.results.models.Conversation;
-import cl.ucn.disc.dsm.pag.chatapp.service.results.models.Message;
-import cl.ucn.disc.dsm.pag.chatapp.service.results.models.User;
+import cl.ucn.disc.dsm.pag.chatapp.service.results.models.ConversationServiceModel;
+import cl.ucn.disc.dsm.pag.chatapp.service.results.models.MessageServiceModel;
+import cl.ucn.disc.dsm.pag.chatapp.service.results.models.UserServiceModel;
 import java.util.List;
 
 public interface Service {
@@ -20,16 +20,18 @@ public interface Service {
 
   /**
    * Get the list of registered users.
+   *
    * @return List of Users
    */
-  List<User> getRegisteredUsers();
+  List<UserServiceModel> getRegisteredUsers();
 
   /**
    * Get user's conversations.
+   *
    * @param apiToken The user api token
    * @return List of conversations
    */
-  List<Conversation> getConversations(String apiToken);
+  List<ConversationServiceModel> getConversations(String apiToken);
 
   /**
    * Creates a new conversation.
@@ -38,7 +40,7 @@ public interface Service {
    * @param recipientId The id of the receiver user of the conversation.
    * @return id of the conversation.
    */
-  int setNewConversation(String apiToken, String recipientId);
+  int setNewConversation(String apiToken, int recipientId);
 
 
   /**
@@ -52,7 +54,7 @@ public interface Service {
    * @param localizationError Localization error.
    * @return The created Message.
    */
-  Message sendMessage(String apiToken, String conversationId, String content,
+  MessageServiceModel sendMessage(String apiToken, int conversationId, String content,
       String latitude, String longitude, String localizationError);
 
 }
