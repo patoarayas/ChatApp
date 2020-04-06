@@ -8,7 +8,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {UserRoomModel.class, ConversationRoomModel.class,
-    MessageRoomModel.class}, version = 1)
+    MessageRoomModel.class}, version = 1, exportSchema = false)
+
 public abstract class ChatRoomDatabase extends RoomDatabase {
 
   // Daos abstract getters
