@@ -2,6 +2,10 @@ package cl.ucn.disc.dsm.pag.chatapp.repository;
 
 import android.app.Application;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Transformations;
+import cl.ucn.disc.dsm.pag.chatapp.model.Conversation;
+import cl.ucn.disc.dsm.pag.chatapp.model.Message;
+import cl.ucn.disc.dsm.pag.chatapp.model.User;
 import cl.ucn.disc.dsm.pag.chatapp.room.ChatRoomDatabase;
 import cl.ucn.disc.dsm.pag.chatapp.room.ConversationDao;
 import cl.ucn.disc.dsm.pag.chatapp.room.ConversationRoomModel;
@@ -15,6 +19,7 @@ import cl.ucn.disc.dsm.pag.chatapp.service.Service;
 import cl.ucn.disc.dsm.pag.chatapp.service.results.models.ConversationServiceModel;
 import cl.ucn.disc.dsm.pag.chatapp.service.results.models.MessageServiceModel;
 import cl.ucn.disc.dsm.pag.chatapp.service.results.models.UserServiceModel;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChatRepository {
@@ -85,9 +90,7 @@ public class ChatRepository {
     return registeredUsers;
   }
 
-  /**
-   * @return List of conversations.
-   */
+  /** @return List of conversations. */
   public LiveData<List<ConversationRoomModel>> getConversations() {
     return conversations;
   }
@@ -131,9 +134,7 @@ public class ChatRepository {
 
   // FETCH API METHODS
 
-  /**
-   * Fetch API and save data to room.
-   */
+  /** Fetch API and save data to room. */
   public void fetchApi() {
     this.fetchRegisteredUsersFromApi();
     this.fetchConversationsAndMessagesFromApi();
@@ -142,7 +143,7 @@ public class ChatRepository {
   /**
    * Call the API Service to perform authentication.
    *
-   * @param email    The user email
+   * @param email The user email
    * @param password The user password
    * @return whether the auth was successful, also initializes the repository apiToken variable.
    */
@@ -155,9 +156,7 @@ public class ChatRepository {
     }
   }
 
-  /**
-   * Call the API to retrieve registered users and save them to the db.
-   */
+  /** Call the API to retrieve registered users and save them to the db. */
   private void fetchRegisteredUsersFromApi() {
     List<UserServiceModel> apiUsers = this.api.getRegisteredUsers();
     // Transform to room model entity TODO: Implement transformer (?)
@@ -172,9 +171,7 @@ public class ChatRepository {
     }
   }
 
-  /**
-   * Call the API and retrieve user conversation and messages and save them into the db
-   */
+  /** Call the API and retrieve user conversation and messages and save them into the db */
   private void fetchConversationsAndMessagesFromApi() {
     if (apiToken != null) {
       List<ConversationServiceModel> conversations = this.api.getConversations(this.apiToken);
@@ -198,4 +195,5 @@ public class ChatRepository {
       }
     }
   }
+
 }
