@@ -22,6 +22,8 @@ import cl.ucn.disc.dsm.pag.chatapp.service.results.models.MessageServiceModel;
 import cl.ucn.disc.dsm.pag.chatapp.service.results.models.UserServiceModel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ChatRepository {
 
@@ -41,6 +43,11 @@ public class ChatRepository {
   // LiveData
   private LiveData<List<ConversationRoomModel>> conversations;
   private LiveData<List<UserRoomModel>> registeredUsers;
+
+  // Executor
+  private static final int NUMBER_OF_THREADS = 4;
+  public static final ExecutorService repositoryExecutor = Executors
+      .newFixedThreadPool(NUMBER_OF_THREADS);
 
   /**
    * Singleton Constructor
@@ -159,7 +166,7 @@ public class ChatRepository {
   public boolean login(String email, String password) {
     try {
       this.apiToken = this.api.getApiToken(email, password);
-      AsyncTask.execute(this::fetchApi);
+      repositoryExecutor.execute(this::fetchApi);
       return true;
     } catch (ChatApiException e) {
       return false;
@@ -169,7 +176,7 @@ public class ChatRepository {
   /** Call the API to retrieve registered users and save them to the db. */
   private void fetchRegisteredUsersFromApi() {
     List<UserServiceModel> apiUsers = this.api.getRegisteredUsers();
-    // Transform to room model entity TODO: Implement transformer (?)
+    // Transform to room model entity.
     for (UserServiceModel usr : apiUsers) {
       UserRoomModel newUsr = new UserRoomModel(usr.id, usr.name, usr.email);
 

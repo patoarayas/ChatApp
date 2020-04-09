@@ -13,6 +13,7 @@ public class ConversationsViewModel extends AndroidViewModel {
 
   LiveData<List<ConversationRoomModel>> conversations;
   LiveData<List<UserRoomModel>> users;
+
   // Repository instance
   private ChatRepository repository;
 
@@ -41,7 +42,7 @@ public class ConversationsViewModel extends AndroidViewModel {
   }
 
   /**
-   * Acces the list of registered users.
+   * Access the list of registered users.
    *
    * @return All users
    */

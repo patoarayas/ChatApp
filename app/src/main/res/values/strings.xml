@@ -5,4 +5,5 @@
   <string name="login_password_hint">password</string>
   <string name="new_conversation">Nueva conversación con…</string>
   <string name="new_conversation_btn">Crear</string>
+  <string name="empty_conversations">No hay conversaciones</string>
 </resources>

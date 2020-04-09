@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import cl.ucn.disc.dsm.pag.chatapp.model.Conversation;
 import cl.ucn.disc.dsm.pag.chatapp.room.ConversationRoomModel;
 import java.util.List;
 
@@ -16,6 +15,7 @@ public class ConversationsRecyclerViewAdapter
 
   private final LayoutInflater inflater;
   private List<ConversationRoomModel> conversations;
+
 
   /**
    * Constructor.
@@ -29,10 +29,10 @@ public class ConversationsRecyclerViewAdapter
   /**
    * Set conversations.
    *
-   * @param conversations
+   * @param conversationsList List of converswtions.
    */
-  public void setConversations(List<ConversationRoomModel> conversations) {
-    conversations = conversations;
+  public void setConversations(List<ConversationRoomModel> conversationsList) {
+    conversations = conversationsList;
     notifyDataSetChanged();
   }
 
@@ -49,7 +49,7 @@ public class ConversationsRecyclerViewAdapter
       ConversationRoomModel current = conversations.get(position);
       holder.conversationItemView.setText(current.getUserOneId());
     } else {
-      holder.conversationItemView.setText("No hay conversaciones.");
+      holder.conversationItemView.setText(R.string.empty_conversations);
     }
   }
 
@@ -66,7 +66,7 @@ public class ConversationsRecyclerViewAdapter
   /**
    * ViewHolder for RecyclerView Items.
    */
-  class ConversationViewHolder extends RecyclerView.ViewHolder {
+  static class ConversationViewHolder extends RecyclerView.ViewHolder {
 
     private final TextView conversationItemView;
 
