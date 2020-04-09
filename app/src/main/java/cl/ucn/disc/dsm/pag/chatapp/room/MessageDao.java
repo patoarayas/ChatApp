@@ -3,6 +3,7 @@ package cl.ucn.disc.dsm.pag.chatapp.room;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
 @Dao
 public interface MessageDao {
 
-  @Insert
+  @Insert(onConflict = OnConflictStrategy.IGNORE)
   void insert(MessageRoomModel message);
 
   @Query("SELECT * FROM messages_table WHERE conversationId = :conversationId ORDER BY createdAt")

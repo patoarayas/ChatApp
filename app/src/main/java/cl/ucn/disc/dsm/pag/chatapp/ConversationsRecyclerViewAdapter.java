@@ -47,9 +47,9 @@ public class ConversationsRecyclerViewAdapter
   public void onBindViewHolder(@NonNull ConversationViewHolder holder, int position) {
     if (conversations != null) {
       ConversationRoomModel current = conversations.get(position);
-      holder.convesationItemView.setText(current.getUserOneId());
+      holder.conversationItemView.setText(current.getUserOneId());
     } else {
-      holder.convesationItemView.setText("No hay conversaciones.");
+      holder.conversationItemView.setText("No hay conversaciones.");
     }
   }
 
@@ -68,11 +68,11 @@ public class ConversationsRecyclerViewAdapter
    */
   class ConversationViewHolder extends RecyclerView.ViewHolder {
 
-    private final TextView convesationItemView;
+    private final TextView conversationItemView;
 
     public ConversationViewHolder(@NonNull View itemView) {
       super(itemView);
-      convesationItemView = itemView.findViewById(R.id.textView);
+      conversationItemView = itemView.findViewById(R.id.textView);
     }
   }
 

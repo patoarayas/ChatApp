@@ -25,6 +25,7 @@ public class ConversationsViewModel extends AndroidViewModel {
     super(application);
 
     this.repository = ChatRepository.getRepository(application);
+
     conversations = repository.getConversations();
     users = repository.getRegisteredUsers();
 

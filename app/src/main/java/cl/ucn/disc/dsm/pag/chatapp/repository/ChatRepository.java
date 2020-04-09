@@ -1,6 +1,7 @@
 package cl.ucn.disc.dsm.pag.chatapp.repository;
 
 import android.app.Application;
+import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 import cl.ucn.disc.dsm.pag.chatapp.model.Conversation;
@@ -56,8 +57,7 @@ public class ChatRepository {
     // Instantiate the api service
     this.api = new ChatApiService();
 
-    // Fetch API
-    INSTANCE.fetchApi();
+
     // Fetch data from room db
     registeredUsers = userDao.getAllUsers();
     conversations = conversationDao.getAllConversations();
@@ -77,11 +77,18 @@ public class ChatRepository {
         }
       }
     }
-
     return INSTANCE;
   }
 
   // Public methods
+
+  public boolean isLoged() {
+    if (this.apiToken != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   /**
    * @return List of registered users.
@@ -90,7 +97,9 @@ public class ChatRepository {
     return registeredUsers;
   }
 
-  /** @return List of conversations. */
+  /**
+   * @return List of conversations.
+   */
   public LiveData<List<ConversationRoomModel>> getConversations() {
     return conversations;
   }
@@ -150,6 +159,7 @@ public class ChatRepository {
   public boolean login(String email, String password) {
     try {
       this.apiToken = this.api.getApiToken(email, password);
+      AsyncTask.execute(this::fetchApi);
       return true;
     } catch (ChatApiException e) {
       return false;
@@ -195,5 +205,7 @@ public class ChatRepository {
       }
     }
   }
+
+
 
 }

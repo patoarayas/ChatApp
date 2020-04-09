@@ -3,6 +3,7 @@ package cl.ucn.disc.dsm.pag.chatapp.room;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 public interface ConversationDao {
 
 
-  @Insert
+  @Insert(onConflict = OnConflictStrategy.IGNORE)
   void insert(ConversationRoomModel conversation);
 
   @Query("SELECT * FROM conversations_table")

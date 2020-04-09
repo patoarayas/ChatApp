@@ -3,13 +3,14 @@ package cl.ucn.disc.dsm.pag.chatapp.room;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import java.util.List;
 
 @Dao
 public interface UserDao {
 
-  @Insert
+  @Insert(onConflict = OnConflictStrategy.IGNORE)
   void insert(UserRoomModel user);
 
 
